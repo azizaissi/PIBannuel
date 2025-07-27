@@ -486,7 +486,6 @@ st.write(f"MAE sur l'ensemble de test : {test_mae:.2f}")
 st.write(f"R² sur l'ensemble de test : {test_r2:.4f}")
 if test_mae > 1.5 * test_maes[best_model_name]:
     error_log.append(f"MAE sur l'ensemble de test ({test_mae:.2f}) significativement plus élevé que le MAE CV ({test_maes[best_model_name]:.2f}).")
-    st.warning("Performance sur l'ensemble de test moins bonne que prévue.")
 
 st.markdown("#### 3. Analyse des résidus")
 residuals = y_test_unscaled - y_pred_test_unscaled
@@ -496,7 +495,6 @@ fig_residuals.add_hline(y=0, line_dash="dash", line_color="black")
 st.plotly_chart(fig_residuals)
 if np.abs(residuals).mean() > test_maes[best_model_name]:
     error_log.append(f"Les résidus moyens ({np.abs(residuals).mean():.2f}) sont élevés par rapport au MAE CV ({test_maes[best_model_name]:.2f}).")
-    st.warning("Les résidus montrent une erreur moyenne élevée, indiquant une possible sous-performance.")
 
 st.markdown("#### 4. Intervalles de prédiction")
 n_bootstraps = 100
